@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html class="light" lang="en" data-th-fragment="parent(content,title,script,link)"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-th-replace="${title}">Base Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/3.1.2/flowbite.css" integrity="sha512-Au4kwfkUb/wVjGoGEMAk3on9uyGdpfrtSrEUSgP5zs4yefFEinpqBonXHrnjwt5mfq1xN47rbtVvcVXNS9t5bQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+    <link rel="stylesheet" data-th-href="@{'/css/style.css'}" />
+
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+<body class="dark:bg-gray-900 bg-gray-100 dark:text-white">
+    <!--  user is logged in : navbar -->
+    <div th:if="${loggedInUser}">
+      <div data-th-replace="~{user/user_navbar::user-navbar}"></div>
+    </div>
+
+    <!-- user is not logged : navbar -->
+    <div th:unless="${loggedInUser}">
+      <div data-th-replace="~{navbar :: navbar}"></div>
+    </div>
+    
+    <!-- Main Content -->
+    <section data-th-replace="${content}"></section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/3.1.2/flowbite.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <th:block data-th-replace="${script}"></th:block>
+    <script data-th-src="@{'/js/script.js'}"></script>
+</body>
+</html>
